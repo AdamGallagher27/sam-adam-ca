@@ -7,21 +7,32 @@ using UnityEngine.InputSystem;
 public class CharachterMovement : MonoBehaviour
 {
 
+    // varaible for the charachter rigidbody
     private Rigidbody rigidBody;
-    public float playerSpeed;
-    public float jumpForce;
-    private bool jumped = false;
-    public bool canMove = true;
+
+    // vector 2 for keyboard / controller input
     private Vector2 movementInput = Vector2.zero;
-    public LayerMask groundLayerMask;
+
+    // variables for jumping
+    private bool jumped = false;
     private float groundCheckDistance = 1.9f;
     private int numJumps = 1;
+    public float jumpForce;
+    public LayerMask groundLayerMask;
 
+    // variables for movement
+    public float playerSpeed;
+    public bool canMove = true;
+
+    // instantiate rigid body
     private void Start()
     {
         rigidBody = gameObject.GetComponent<Rigidbody>();
     }
 
+    // called when player moves or jumps
+    // called in input action component
+    
     public void OnMove(InputAction.CallbackContext context)
     {
         movementInput = context.ReadValue<Vector2>();
@@ -32,31 +43,33 @@ public class CharachterMovement : MonoBehaviour
         jumped = context.action.triggered;
     }
 
+    // check if the player is on the ground
     private bool IsGrounded()
     {
-        // Debug.Log(Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, groundLayerMask));
         return Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, groundLayerMask);
     }
 
 
     void Update()
     {
-        // Debug.DrawRay(transform.position, -transform.up * 2f, Color.red);
-
         if (canMove)
         {
+            // create a new vector 3 for the movement from controller / keyboard
+            // get the move direction
             Vector3 move = new Vector3(movementInput.x, movementInput.y, 0);
             Vector3 moveDirection = transform.TransformDirection(move);
 
+            // assign move direciton to the velocity
             rigidBody.velocity = new Vector3(moveDirection.x * playerSpeed, rigidBody.velocity.y, 0);
 
+            // if the player can jump add for in the y direction
             if (jumped && IsGrounded() && numJumps > 0)
             {
                 numJumps -= 1;
-                Debug.Log(Vector3.up * jumpForce);
                 rigidBody.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
             }
 
+            // reset the number of jumps
             if(IsGrounded())
             {
                 numJumps = 1;

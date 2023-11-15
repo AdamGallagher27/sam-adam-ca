@@ -7,28 +7,36 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class HandleKnockBack : MonoBehaviour
 {
+    // create variable for the charachter movement script / rigid body
     private CharachterMovement charachterMovement;
     private Rigidbody playerRigidBody;
-    private int StartingKnockBack = 1;
-    public int KnockBackMultiplier = 1;
-    private ForceMode forceMode = ForceMode.Impulse;
 
+    // vairables for the knock back
+    private int StartingKnockBack = 1;
+    private ForceMode forceMode = ForceMode.Impulse;
+    public int KnockBackMultiplier = 1;
+
+
+    // get the rigid body and the charachter movement script
     private void Start()
     {
         playerRigidBody = gameObject.GetComponent<Rigidbody>();
         charachterMovement = gameObject.GetComponent<CharachterMovement>();
     }
 
+    // add 5 to the knock back value
     public void incrementKnockBack()
     {
         KnockBackMultiplier += 5;
     }
 
+    // reset the knock back to the starting knock back value
     public void resetKnockBack()
     {
         KnockBackMultiplier = StartingKnockBack;
     }
 
+    // enable / disable player controls
     private void enablePlayerControls()
     {
         charachterMovement.canMove = true;
@@ -39,6 +47,7 @@ public class HandleKnockBack : MonoBehaviour
         charachterMovement.canMove = false;
     }
 
+    // add knock back to the player and disable their controls then enable them
     public void addKnockBack(Vector3 knockbackDirection)
     {
         incrementKnockBack();

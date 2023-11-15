@@ -6,20 +6,23 @@ public class OutBoundPoint : MonoBehaviour
 {
 
     // every game mode must have these functions / struct
-
+    // struct to hold the game state
     struct ScoreStruct {
         public int pointsPlayer1;
         public int pointsPlayer2;
     }
 
+    // variable for game state
     ScoreStruct gameScore;
 
+    // print the score to the console
     private void showScore()
     {
         Debug.Log("ONE : " + gameScore.pointsPlayer1 + " TWO : " + gameScore.pointsPlayer2 );
     }
 
-
+    // event listener for when a player falls off the arena
+    // then call increment score
     private void listenOutOfBoundsEvent()
     {
         GameObject outOfBoundsBoundary = GameObject.Find("OutOfBounds1");
@@ -28,6 +31,7 @@ public class OutBoundPoint : MonoBehaviour
     }
 
     // Start is called before the first frame update
+    // instantiate scorestruct listen for player falls of arena event
     private void Start()
     {
         gameScore = new ScoreStruct();
@@ -35,6 +39,7 @@ public class OutBoundPoint : MonoBehaviour
         listenOutOfBoundsEvent();
     }
 
+    // incriment the score of the given player
     private void incrementScore(string playerName)
     {
         if(playerName == "Player1")
