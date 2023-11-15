@@ -73,6 +73,7 @@ public class CharachterMovement : MonoBehaviour
             if(IsGrounded())
             {
                 numJumps = 1;
+                jumped = false;
             }
         }
     }
