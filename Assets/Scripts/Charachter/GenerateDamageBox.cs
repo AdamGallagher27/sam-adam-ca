@@ -50,7 +50,6 @@ public class GenerateDamageBox : MonoBehaviour
 
     void SpawnAndDestroyObject()
     {
-
         Vector3 spawnDirection;
 
         if(direciton == "left")
@@ -78,5 +77,4 @@ public class GenerateDamageBox : MonoBehaviour
         // Schedule the object for destruction after the display time
         Destroy(temporaryObject, displayTime);
     }
-
 }
