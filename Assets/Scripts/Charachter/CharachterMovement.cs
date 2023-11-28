@@ -50,6 +50,11 @@ public class CharachterMovement : MonoBehaviour
     }
 
 
+    public delegate void PlayerChangeDirection(string direction);
+
+    public event PlayerChangeDirection OnChangedDirection;
+
+
     void Update()
     {
         if (canMove)
@@ -74,6 +79,26 @@ public class CharachterMovement : MonoBehaviour
             {
                 numJumps = 1;
                 jumped = false;
+            }
+
+            // Rotate only the visual part by 180 degrees around the Y-axis
+            if (movementInput.x < 0)
+            {
+                transform.GetChild(0).rotation = Quaternion.Euler(0, -90, 0);
+
+                if(OnChangedDirection != null)
+                {
+                    OnChangedDirection("left");
+                }
+            }
+            else if (movementInput.x > 0)
+            {
+                transform.GetChild(0).rotation = Quaternion.Euler(0, 90, 0);
+
+                if(OnChangedDirection != null)
+                {
+                    OnChangedDirection("right");
+                }
             }
         }
     }
