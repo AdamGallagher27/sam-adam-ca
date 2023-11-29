@@ -41,18 +41,26 @@ public class CharachterMovement : MonoBehaviour
     {
         jumped = context.action.triggered;
     }
-    
+
     // check if the player is on the ground
     private bool IsGrounded()
     {
         return Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, groundLayerMask);
     }
 
+    public delegate void PlayerIsGrounded(bool grounded);
+
+    public event PlayerIsGrounded OnGrounded;
+
 
     public delegate void PlayerChangeDirection(string direction);
 
     public event PlayerChangeDirection OnChangedDirection;
 
+    private void addUpwardsForce()
+    {
+        rigidBody.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
+    }
 
     void Update()
     {
@@ -70,14 +78,27 @@ public class CharachterMovement : MonoBehaviour
             if (jumped && IsGrounded() && numJumps > 0)
             {
                 numJumps -= 1;
-                rigidBody.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
+                Invoke("addUpwardsForce", 0.4f);
             }
 
             // reset the number of jumps
-            if(IsGrounded())
+            if (IsGrounded())
             {
                 numJumps = 1;
                 jumped = false;
+
+                if (OnGrounded != null)
+                {
+                    OnGrounded(true);
+                }
+            }
+
+            if (!IsGrounded())
+            {
+                if (OnGrounded != null)
+                {
+                    OnGrounded(false);
+                }
             }
 
             // Rotate only the visual part by 180 degrees around the Y-axis
@@ -85,7 +106,7 @@ public class CharachterMovement : MonoBehaviour
             {
                 transform.GetChild(0).rotation = Quaternion.Euler(0, -90, 0);
 
-                if(OnChangedDirection != null)
+                if (OnChangedDirection != null)
                 {
                     OnChangedDirection("left");
                 }
@@ -94,7 +115,7 @@ public class CharachterMovement : MonoBehaviour
             {
                 transform.GetChild(0).rotation = Quaternion.Euler(0, 90, 0);
 
-                if(OnChangedDirection != null)
+                if (OnChangedDirection != null)
                 {
                     OnChangedDirection("right");
                 }

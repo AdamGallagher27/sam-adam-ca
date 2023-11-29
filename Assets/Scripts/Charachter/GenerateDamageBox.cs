@@ -14,7 +14,7 @@ public class GenerateDamageBox : MonoBehaviour
 
     private void setDirection(string dir)
     {
-        Debug.Log(dir);
+        // Debug.Log(dir);
         direciton = dir;
     }
 
@@ -29,7 +29,6 @@ public class GenerateDamageBox : MonoBehaviour
         currentPlayer = gameObject.name;
         listenDirectionChange();
     }
-
 
     void Update()
     {
