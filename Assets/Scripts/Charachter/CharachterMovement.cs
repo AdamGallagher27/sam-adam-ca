@@ -32,8 +32,7 @@ public class CharachterMovement : MonoBehaviour
 
     // called when player moves or jumps
     // called in input action component
-    
-    public void OnMove(InputAction.CallbackContext context)
+    private void OnMove(InputAction.CallbackContext context)
     {
         movementInput = context.ReadValue<Vector2>();
     }
@@ -42,7 +41,7 @@ public class CharachterMovement : MonoBehaviour
     {
         jumped = context.action.triggered;
     }
-
+    
     // check if the player is on the ground
     private bool IsGrounded()
     {

@@ -7,7 +7,7 @@ public class GenerateDamageBox : MonoBehaviour
 {
     public GameObject temporaryObjectPrefab; 
     public float spawnDistance = 2f; 
-    public float displayTime = 1f; 
+    public float displayTime = 1f;
 
     private string direciton;
     private string currentPlayer;
