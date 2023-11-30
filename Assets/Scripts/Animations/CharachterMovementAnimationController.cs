@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 // [RequireComponent(typeof(CharachterMovement))]
 
-public class CharachterAnimationController : MonoBehaviour
+public class CharachterMovementAnimationController : MonoBehaviour
 {
 
     private Animator animator;

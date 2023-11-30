@@ -6,11 +6,13 @@ using UnityEngine.InputSystem;
 public class GenerateDamageBox : MonoBehaviour
 {
     public GameObject temporaryObjectPrefab; 
-    public float spawnDistance = 2f; 
+    public float spawnDistance = 1.6f; 
     public float displayTime = 1f;
 
     private string direciton;
     private string currentPlayer;
+
+    private Vector3 spawnPosition;
 
     // setter function for dirirection variable
     private void setDirection(string dir)
@@ -39,15 +41,27 @@ public class GenerateDamageBox : MonoBehaviour
         // if true generate damage box
         if (Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame && currentPlayer == "Player1")
         {
-            SpawnAndDestroyObject();
+            SpawnAndDestroyObject("punch");
+            // Debug.Log("E");
+        }
+
+        if (Keyboard.current != null && Keyboard.current.qKey.wasPressedThisFrame && currentPlayer == "Player1")
+        {
+            SpawnAndDestroyObject("kick");
             // Debug.Log("E");
         }
 
         // Check for the X button on the controller
         // if true generate damage box
-        if (Gamepad.current != null && Gamepad.current.xButton.wasPressedThisFrame && currentPlayer == "Player2")
+        if (Gamepad.current != null && Gamepad.current.buttonWest.wasPressedThisFrame && currentPlayer == "Player2")
         {
-            SpawnAndDestroyObject();
+            SpawnAndDestroyObject("punch");
+            // Debug.Log("X");
+        }
+
+        if (Gamepad.current != null && Gamepad.current.buttonNorth.wasPressedThisFrame && currentPlayer == "Player2")
+        {
+            SpawnAndDestroyObject("kick");
             // Debug.Log("X");
         }
     }
@@ -72,15 +86,31 @@ public class GenerateDamageBox : MonoBehaviour
     }
 
     // generate damage box infront of the player
-    private void SpawnAndDestroyObject()
+    private void SpawnAndDestroyObject(string typeAttack)
     {
-        Vector3 spawnDirection = calcLocationForDamageBox(direciton);
 
-        // Calculate the position in front of the character
-        Vector3 spawnPosition = transform.position + spawnDirection;
+        if(typeAttack == "punch")
+        {
+            Vector3 spawnDirection = calcLocationForDamageBox(direciton);
 
-        // Instantiate the temporary object
+            // Calculate the position in front of the character
+            spawnPosition = transform.position + spawnDirection;
+
+            spawnPosition.y += 0f;
+
+            // Instantiate the temporary object
+        }
+        else{
+            Vector3 spawnDirection = calcLocationForDamageBox(direciton);
+
+            // Calculate the position in front of the character
+            spawnPosition = transform.position + spawnDirection;
+
+            spawnPosition.y += 1f;
+        }
+
         GameObject temporaryObject = Instantiate(temporaryObjectPrefab, spawnPosition, Quaternion.identity);
+
 
         // Schedule the object for destruction after the display time
         Destroy(temporaryObject, displayTime);
