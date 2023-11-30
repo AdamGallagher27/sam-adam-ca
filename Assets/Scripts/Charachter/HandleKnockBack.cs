@@ -16,7 +16,6 @@ public class HandleKnockBack : MonoBehaviour
     private ForceMode forceMode = ForceMode.Impulse;
     public int KnockBackMultiplier = 1;
 
-
     // get the rigid body and the charachter movement script
     private void Start()
     {

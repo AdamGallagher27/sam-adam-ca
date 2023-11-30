@@ -21,6 +21,7 @@ public class KingOfTheHill : MonoBehaviour
         Debug.Log("ONE : " + gameScore.timeOnHill1 + " TWO : " + gameScore.timeOnHill2);
     }
 
+    // listen for the on top of the hill event
     private void listenOnTopOfHill()
     {
         GameObject OnTopBox = GameObject.Find("OnTopBox");
@@ -46,15 +47,9 @@ public class KingOfTheHill : MonoBehaviour
         // Debug.Log(playerName);
     }
 
-    // Start is called before the first frame update
+    // instantiate event listener
     void Start()
     {
         listenOnTopOfHill();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

@@ -43,20 +43,22 @@ public class CharachterMovement : MonoBehaviour
     }
 
     // check if the player is on the ground
-    private bool IsGrounded()
+    public bool IsGrounded()
     {
         return Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, groundLayerMask);
     }
 
+    // event to see if the player is on the ground
     public delegate void PlayerIsGrounded(bool grounded);
 
     public event PlayerIsGrounded OnGrounded;
 
-
+    // event to see if the charachter changes direction
     public delegate void PlayerChangeDirection(string direction);
 
     public event PlayerChangeDirection OnChangedDirection;
 
+    // apply upwards force to jump
     private void addUpwardsForce()
     {
         rigidBody.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
@@ -87,6 +89,7 @@ public class CharachterMovement : MonoBehaviour
                 numJumps = 1;
                 jumped = false;
 
+
                 if (OnGrounded != null)
                 {
                     OnGrounded(true);
@@ -101,7 +104,7 @@ public class CharachterMovement : MonoBehaviour
                 }
             }
 
-            // Rotate only the visual part by 180 degrees around the Y-axis
+            // Rotate only the visual part (THE MODEL) by 180 degrees around the Y-axis
             if (movementInput.x < 0)
             {
                 transform.GetChild(0).rotation = Quaternion.Euler(0, -90, 0);

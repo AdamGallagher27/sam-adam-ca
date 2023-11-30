@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028359, g: 0.22571385, b: 0.30692258, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -360,6 +360,44 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 500833918}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &535225933 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1194971921460078205, guid: 34a31b87f3f1769488549b87199065ea, type: 3}
+  m_PrefabInstance: {fileID: 1653356446}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &535225935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 535225933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 819826159022c184ba127b3761fab270, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentPlayer: {fileID: 1468226206}
+--- !u!95 &535225936
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 535225933}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a10aade3f6f9e604ea95d4c44937a8e1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -588,7 +626,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: a10aade3f6f9e604ea95d4c44937a8e1, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -1707,6 +1745,22 @@ PrefabInstance:
     - target: {fileID: 132459531769523629, guid: 34a31b87f3f1769488549b87199065ea, type: 3}
       propertyPath: m_Constraints
       value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 5154760001190390268, guid: 34a31b87f3f1769488549b87199065ea, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5154760001190390268, guid: 34a31b87f3f1769488549b87199065ea, type: 3}
+      propertyPath: m_AABB.m_Center.x
+      value: 0.000044452026
+      objectReference: {fileID: 0}
+    - target: {fileID: 5154760001190390268, guid: 34a31b87f3f1769488549b87199065ea, type: 3}
+      propertyPath: m_AABB.m_Center.y
+      value: 0.0020662458
+      objectReference: {fileID: 0}
+    - target: {fileID: 5154760001190390268, guid: 34a31b87f3f1769488549b87199065ea, type: 3}
+      propertyPath: m_AABB.m_Extent.y
+      value: 0.007982286
       objectReference: {fileID: 0}
     - target: {fileID: 6315367214710755466, guid: 34a31b87f3f1769488549b87199065ea, type: 3}
       propertyPath: m_LocalPosition.x

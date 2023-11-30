@@ -12,18 +12,21 @@ public class GenerateDamageBox : MonoBehaviour
     private string direciton;
     private string currentPlayer;
 
+    // setter function for dirirection variable
     private void setDirection(string dir)
     {
         // Debug.Log(dir);
         direciton = dir;
     }
 
+    // listen for the direction change event
     private void listenDirectionChange()
     {
         CharachterMovement charachterMovement = gameObject.GetComponent<CharachterMovement>();
         charachterMovement.OnChangedDirection += setDirection;
     }
 
+    // instantiate event listener for direction change
     void Start()
     {
         currentPlayer = gameObject.name;
@@ -33,6 +36,7 @@ public class GenerateDamageBox : MonoBehaviour
     void Update()
     {
         // Check for the E key on the keyboard
+        // if true generate damage box
         if (Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame && currentPlayer == "Player1")
         {
             SpawnAndDestroyObject();
@@ -40,6 +44,7 @@ public class GenerateDamageBox : MonoBehaviour
         }
 
         // Check for the X button on the controller
+        // if true generate damage box
         if (Gamepad.current != null && Gamepad.current.xButton.wasPressedThisFrame && currentPlayer == "Player2")
         {
             SpawnAndDestroyObject();
@@ -47,25 +52,29 @@ public class GenerateDamageBox : MonoBehaviour
         }
     }
 
-    void SpawnAndDestroyObject()
+    // calculate the location for the damage box to spawn
+    private Vector3 calcLocationForDamageBox(string direciton)
     {
-        Vector3 spawnDirection;
-
         if(direciton == "left")
         {
             // there is no transfrom left
             // left = -transform.right
-            spawnDirection = -transform.right * spawnDistance;
-            
+            return -transform.right * spawnDistance;
         }
         else if(direciton == "right")
         {
-            spawnDirection = transform.right * spawnDistance;
+            return transform.right * spawnDistance;
         }
         else
         {
-            spawnDirection = Vector3.zero;
+            return Vector3.zero;
         }
+    }
+
+    // generate damage box infront of the player
+    private void SpawnAndDestroyObject()
+    {
+        Vector3 spawnDirection = calcLocationForDamageBox(direciton);
 
         // Calculate the position in front of the character
         Vector3 spawnPosition = transform.position + spawnDirection;

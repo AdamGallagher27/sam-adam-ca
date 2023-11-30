@@ -5,17 +5,20 @@ using UnityEngine;
 public class CheckIsOnTop : MonoBehaviour
 {
 
+    // create an event for when the player is on top of the hill
     public delegate void PlayerOnHill(string playerName);
 
     public event PlayerOnHill OnTopOfHill;
 
+    // when the player stands on top of the hill send out the
+    // event
     void OnTriggerStay(Collider collider)
     {
-        string PlayerName = collider.gameObject.name;
+        string playerName = collider.gameObject.name;
 
         if (OnTopOfHill != null)
         {
-            OnTopOfHill(PlayerName);
+            OnTopOfHill(playerName);
         }
     }
 }
